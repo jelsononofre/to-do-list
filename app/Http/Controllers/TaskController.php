@@ -62,7 +62,6 @@ class TaskController extends Controller
             return response()->json($transformData);
         } catch (Exception $error) {
             report($error);
-            dd($error);
         }
     }
 
