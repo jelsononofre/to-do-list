@@ -12,6 +12,13 @@ class Task extends Model
     public const FINISHED = 2;
     public const CANCELLED = 3;
 
+    public const STATUS = [
+        self::PENDING => 'Pendente',
+        self::WORK_IN_PROGRESS => 'Em andamento',
+        self::FINISHED => 'Finalizado',
+        self::CANCELLED => 'Cancelado'
+    ];
+
     protected $table = 'tasks';
 
     protected $fillable = [
