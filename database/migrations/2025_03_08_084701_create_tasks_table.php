@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('info');
-            $table->integer('created_by');
+            $table->integer('status')->default(0);
+            $table->string('created_by');
             $table->timestamps();
         });
     }
