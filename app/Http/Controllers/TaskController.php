@@ -45,9 +45,22 @@ class TaskController extends Controller
         }
     }
 
-    public function get()
+    public function get($id)
     {
-        
+        try {
+            $results = $this->repository->findById($id);
+
+            $transformData = fractal($results, new TaskTransform());
+
+            return response()->json($transformData);
+        } catch (Exception $error) {
+            report($error);
+
+            return response()->json([
+                'message' => 'Erro ao consultar task, entre em contato com o suporte!',
+                'taskId' => null
+            ]);
+        }
     }
 
     public function getAll()
@@ -70,8 +83,29 @@ class TaskController extends Controller
         
     }
 
-    public function delete()
+    public function delete($id)
     {
-        
+        try {
+            $results = $this->repository->delete($id);
+
+            if (empty($results)) {
+                return response()->json([
+                    'message' => 'Nenhuma task encontrada com esse ID para exclusão!',
+                    'taskId' => (int) $id
+                ]);
+            }
+
+            return response()->json([
+                'message' => 'Task excluída com sucesso!',
+                'taskId' => (int) $id
+            ]);
+        } catch (Exception $error) {
+            report($error);
+
+            return response()->json([
+                'message' => 'Erro ao remover task, entre em contato com o suporte!',
+                'taskId' => null
+            ]);
+        }
     }
 }
