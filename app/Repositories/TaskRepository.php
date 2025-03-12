@@ -18,4 +18,17 @@ class TaskRepository
             ->get()
             ->toArray();
     }
+
+    public function findById($id)
+    {
+        return Task::where('id', '=', $id)
+            ->get()
+            ->toArray();
+    }
+
+    public function delete($id)
+    {
+        return Task::where('id', '=', $id)
+            ->delete();
+    }
 }
