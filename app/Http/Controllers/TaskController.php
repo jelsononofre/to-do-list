@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use App\Repositories\TaskRepository;
 use App\Transformers\TaskTransform;
 use Exception;
@@ -24,8 +25,8 @@ class TaskController extends Controller
         try {
             $params = [
                 'title' => $request->get('title', null),
-                'info' => $request->get('info', null),
-                'status' => $request->get('status', default: 0),
+                'description' => $request->get('description', null),
+                'status' => Task::PENDING,
                 'created_by' => $this->authUser->name
             ];
     

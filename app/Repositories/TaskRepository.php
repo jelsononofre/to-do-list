@@ -15,6 +15,7 @@ class TaskRepository
     public function getAll(Authenticatable $authUser)
     {
         return Task::where("created_by", '=', $authUser->name)
+            ->orderBy('created_at', 'asc')
             ->get()
             ->toArray();
     }

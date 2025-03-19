@@ -18,9 +18,12 @@ class TaskTransform extends TransformerAbstract
             'id' => $object['id'],
             'taskInfo' => [
                 'title' => $object['title'],
-                'info' => $object['info']
+                'description' => $object['description']
             ],
-            'status' => Task::STATUS[$statusCode],
+            'status' => [
+                'code' => (int) $statusCode,
+                'name' => Task::STATUS[$statusCode]
+            ],
             'createdBy' => $object['created_by'],
             'createdAt' => Utils::formatDate($createdAt),
             'updatedAt' => Utils::formatDate($updatedAt)
